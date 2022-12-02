@@ -1,22 +1,9 @@
-//lab1_A
-
-Node *GetNodeByData(LinkedList * ls, int data)
+void InsertAfter(LinkedList * ls, int data, int AfterData)
 {
-    Node *current = ls->head;
-    while (current != NULL)
-    {
-        if(data == current->data)
-        {
-            return current;
-        }
-        current = current->next;
-    }
-    return NULL;
-}
-
-void DeleteNode(LinkedList * ls, int data)
-{
-    Node *node = GetNodeByData(ls, data);
+    Node *node = GetNodeByData(ls, AfterData);
+    Node *newNode = malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->prev = newNode->next = NULL;
     if(node == NULL)
     {
         return;
@@ -27,26 +14,67 @@ void DeleteNode(LinkedList * ls, int data)
         {
             if(node == ls->tail)
             {
-                ls->head = ls->tail = NULL;
+                Add(ls, data);
+                node->next->index = node->index + 1;
             }
             else
             {
-                ls->head = ls->head->next;
-                ls->head->prev = NULL;
+                Node *prev = node->prev;
+                Node *next = node->next;
+
+                node->next = newNode;
+                node->next->index = node->index + 1;
+
+                newNode->prev = node;
+                newNode->next = next;
+
+                newNode->index = node->index+1;
+                int isAfterEdit = 0;
+                Node *current = newNode;
+                while (current != NULL)
+                {
+                    if(isAfterEdit == 1)
+                    {
+                        current->index++;
+                    }
+                    if(newNode->data == current->data)
+                    {
+                        isAfterEdit = 1;
+                    }
+                    current = current->next;
+                }
             }
         }
         else if(node == ls->tail)
         {
-            ls->tail = ls->tail->prev;
-            ls->tail->next = NULL;
+            Add(ls, data);
+                node->next->index = node->index + 1;
         }
         else
         {
             Node *prev = node->prev;
             Node *next = node->next;
-            prev->next = next;
-            next->prev = prev;
+
+            node->next = newNode;
+            newNode->prev = node;
+            newNode->next = next;
+
+
+            node->next->index = node->index + 1;
+            int isAfterEdit = 0;
+            Node *current = newNode;
+            while (current != NULL)
+            {
+                if(isAfterEdit == 1)
+                {
+                    current->index++;
+                }
+                if(newNode->data == current->data)
+                {
+                    isAfterEdit = 1;
+                }
+                current = current->next;
+            }.
         }
-        free(node);
     }
-}
+    }
