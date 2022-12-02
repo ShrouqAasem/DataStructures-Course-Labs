@@ -1,3 +1,5 @@
+//lab1_A
+
 Node *GetNodeByData(LinkedList * ls, int data)
 {
     Node *current = ls->head;
