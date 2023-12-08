@@ -33,6 +33,6 @@ Contributions are always welcome!
 
 ## Acknowledgments
 
-- Special thanks to for the valuable insights during the Data Structures course.
+- Special thanks to -Ahmed Mamdouh- for the valuable insights during the Data Structures course.
 
 Happy coding!
